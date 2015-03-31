@@ -1,0 +1,185 @@
+@font-face {
+  font-family: 'BenderBlack';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/bender-black-webfont.eot');
+  src: url('../fonts/bender-black-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bender-black-webfont.woff') format('woff'), url('../fonts/bender-black-webfont.ttf') format('truetype'), url('../fonts/bender-black-webfont.svg#BenderBlack') format('svg');
+}
+@font-face {
+  font-family: 'BenderBlackItalic';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/bender-blackitalic-webfont.eot');
+  src: url('../fonts/bender-blackitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/bender-blackitalic-webfont.woff') format('woff'), url('../fonts/bender-blackitalic-webfont.ttf') format('truetype'), url('../fonts/bender-blackitalic-webfont.svg#BenderBlackItalic') format('svg');
+}
+@font-face {
+  font-family: 'RobotoLight';
+  font-weight: normal;
+  font-style: normal;
+  src: url('../fonts/Roboto-Light-webfontt.eot');
+  src: url('../fonts/Roboto-Light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/Roboto-Light-webfont.woff') format('woff'), url('../fonts/Roboto-Light-webfont.ttf') format('truetype'), url('../fonts/Roboto-Light-webfont.svg#RobotoLight') format('svg');
+}
+html,
+body,
+div,
+span,
+embed,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+output,
+q,
+samp,
+small,
+strong,
+sub,
+sup,
+var,
+b,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+fieldset,
+legend,
+label,
+main,
+section,
+article,
+aside,
+canvas,
+details,
+summary,
+figure,
+figcaption,
+header,
+footer,
+hgroup,
+menu,
+nav,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+body {
+  font-family: RobotoLight;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+}
+a {
+  transition: color 0.4s ease 0s;
+}
+#header {
+  background: white;
+  text-align: center;
+}
+#header .logo {
+  font-family: BenderBlack;
+  font-size: 2.143em;
+  text-align: center;
+  padding: 20px 0;
+  margin: 0;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  color: #3ac9c2;
+}
+#header .logo > span {
+  font-family: Bender;
+}
+.coming-soon img {
+  display: block;
+  max-width: 100%;
+}
+main {
+  position: relative;
+}
+.coming-soon-block {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  line-height: 1.4;
+}
+.coming-soon-block h2 {
+  text-transform: uppercase;
+  font-family: BenderBlackItalic;
+  font-size: 3.429em;
+}
+.timer {
+  overflow: hidden;
+  margin-top: 90px;
+}
+.timer li {
+  list-style: none;
+  display: inline-block;
+  padding-left: 15px;
+}
+.timer li:first-child {
+  padding-left: 0;
+}
+.timer .number {
+  display: inline-block;
+  border: 2px solid #4a594b;
+  padding: 20px 25px;
+  font-family: BenderBlackItalic;
+  font-size: 3.429em;
+  width: 55px;
+}
+.timer .text {
+  text-align: center;
+  margin-top: 5px;
+}
+#footer {
+  text-align: center;
+  color: #999999;
+  padding: 40px 0;
+  font-size: 1em;
+}
+#footer a {
+  color: #000000;
+  text-decoration: none;
+}
+#footer a:hover {
+  color: #3ac9c2;
+}
+.page-2 {
+  min-width: 1024px;
+}
