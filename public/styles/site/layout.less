@@ -1,0 +1,249 @@
+body,
+html {
+	height: 100%;
+}
+// Wrapper
+.wrapper {
+	background-color: white;
+	min-height: 100%;
+
+	@media (min-width: @breakpoint-lg) {
+		border-left: 1px solid darken(@body-bg, 6%);
+		border-right: 1px solid darken(@body-bg, 6%);
+		margin: 0 auto;
+		width: @breakpoint-lg - 2; // less the borders
+	}
+}
+.wrapper-inner {
+	padding-left: 15px;
+	padding-right: 15px;
+
+	@media (min-width: @breakpoint-sm) {
+		margin: 0 auto;
+		padding-left: 0;
+		padding-right: 0;
+		width: 640px;
+	}
+
+}
+
+// header
+.site-header {
+	background: url('/images/bg-header.jpg') center center no-repeat;
+	background-size: cover;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+
+	.logo {
+		display: inline-block;
+	}
+	.avatar{
+		border-radius: 50%;
+		width: 90px;
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(180deg);
+		-ms-transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		transform: rotate(180deg);
+		-webkit-transition: all 0.7s ease;
+		transition: all 0.7s ease;
+		&:hover {
+			-webkit-transform: rotate(0);
+			-moz-transform: rotate(0);
+			-ms-transform: rotate(0);
+			-o-transform: rotate(0);
+			transform: rotate(0);
+		}
+	}
+	a {
+		margin-left: 20px;
+		font-size: 32px;
+		text-decoration: none;
+		color: white;
+		text-shadow:
+			1px 1px 0 #CCC,
+			2px 2px 0 #CCC,
+			3px 3px 0 #444,
+			4px 4px 0 #444,
+			5px 5px 0 #444,
+			6px 6px 0 #444;
+	}
+
+	@media (min-width: @breakpoint-sm) {
+		height: 200px;
+		line-height: 200px;
+	}
+	@media (max-width: @breakpoint-sm) {
+		.logo {
+			height: 50%;
+		}
+
+		.avatar{
+			width: 60px;
+		}
+		a {
+			margin-left: 10px;
+			font-size: 20px;
+		}
+	}
+}
+
+
+
+
+// navbar
+.navbar {
+	margin: 0 0 40px;
+}
+.navbar {
+	position: relative;
+	// min-height: @navbar-height; // Ensure a navbar always shows (e.g., without a .navbar-brand in collapsed mode)
+	margin-bottom: 40px;
+	border-bottom: 1px solid @hr-border;
+}
+.navbar-nav {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+	}
+	/*a {
+		color: @gray-light;
+		display: block;
+		padding: 10px 5px;
+
+		&:hover,
+		&:focus {
+			color: @gray;
+			text-decoration: none;
+		}
+	}*/
+	.active > a {
+		color: @gray;
+		font-weight: normal;
+	}
+	a{
+		color: #6f8686;
+		text-shadow: 0 0 1px rgba(111,134,134,0.3);
+	    display: inline-block;
+	    letter-spacing: 1px;
+	    margin: 15px;
+	    outline: medium none;
+	    position: relative;
+	    text-decoration: none;
+	}
+	
+	li a {
+		padding: 8px 0;
+	}
+
+	li a::after {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		height: 4px;
+		background: rgba(0,0,0,0.1);
+		content: '';
+		opacity: 0;
+		-webkit-transition: opacity 0.3s, -webkit-transform 0.3s;
+		-moz-transition: opacity 0.3s, -moz-transform 0.3s;
+		transition: opacity 0.3s, transform 0.3s;
+		-webkit-transform: translateY(10px);
+		-moz-transform: translateY(10px);
+		transform: translateY(10px);
+	}
+	
+	li a:hover::after,
+	li a:focus::after {
+		opacity: 1;
+		-webkit-transform: translateY(0px);
+		-moz-transform: translateY(0px);
+		transform: translateY(0px);
+	}
+
+	@media (min-width: @breakpoint-sm) {
+		font-size: @font-size-large;
+		font-weight: 200;
+
+		a {
+			padding: 30px;
+		}
+	}
+}
+
+
+
+// footer
+.site-footer {
+	border-top: 1px solid @gray-lighter;
+	color: @gray-light;
+	margin-top: 100px;
+	padding: 50px 0;
+	position: relative;
+	text-align: center;
+	a {
+		color: @gray-light;
+	}
+	
+	@media (min-width: @screen-sm) {
+		padding: 100px 0;
+	}
+	
+}
+
+
+
+// gallery
+.gallery-image {
+	margin-bottom: @grid-gutter-width;
+	
+	img {
+		-webkit-box-shadow: 0px 0px 15px 5px rgba(0, 185, 233, .75);
+		
+		box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .75);
+		-webkit-transition: all 0.7s ease;
+		transition: all 0.7s ease;
+
+		.img-responsive;
+		&:hover{
+			-webkit-box-shadow: 0px 0px 15px 10px rgba(255, 255, 255, .75);
+			box-shadow: 0px 0px 15px 5px rgba(0, 185, 233, .75);
+		}
+	}
+}
+
+
+
+// Comments
+#comments {
+	border-top: 1px solid @hr-border;
+	margin-top: 40px;
+	padding-top: 40px;
+}
+.comment-form {
+	margin-bottom: 40px;
+}
+.comment-field {
+	margin-bottom: 10px;
+}
+.comment-field-input {
+	min-height: 60px;
+}
+.comment-thread {
+	font-size: @font-size-base;
+}
+.comment-post {
+	margin: 20px 0;
+}
+
+
+
+// Form stuff
+textarea {
+	.resizable(vertical);
+}
