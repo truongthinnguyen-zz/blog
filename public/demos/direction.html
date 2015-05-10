@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Travel modes in directions</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+      #panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+      var loop = true;
+      var directionsDisplay;
+      var directionsService = new google.maps.DirectionsService();
+      var map;
+      var startPoint = new google.maps.LatLng(10.807164, 106.664591);
+      var endPoint = new google.maps.LatLng(10.795023, 106.676478);
+
+      function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var mapOptions = {
+          zoom: 14,
+          center: startPoint
+        }
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        directionsDisplay.setMap(map);
+        calcRoute();
+      }
+
+      function calcRoute() {
+        var request = {
+            origin: startPoint,
+            destination: endPoint,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function(response, status) {
+          if (status == google.maps.DirectionsStatus.OK) {
+            console.log(response);
+            directionsDisplay.setDirections(response);
+
+            var lineCoordinates = [],
+                paths = response.routes[0].overview_path;
+            for(var i = 0, len = paths.length; i < len; i++){
+              var p = paths[i];
+              lineCoordinates.push(new google.maps.LatLng(p.lat(), p.lng()));
+            }
+
+            var lineSymbol = {
+              // put the icon here. Reference http://raphaeljs.com/icons/
+              // https://css-tricks.com/svg-sprites-use-better-icon-fonts/
+              path: google.maps.SymbolPath.FORWARD_OPEN_ARROW,
+              scale: 4,
+              strokeColor: '#393'
+            };
+
+            line = new google.maps.Polyline({
+              path: lineCoordinates,
+              icons: [{
+                icon: lineSymbol,
+                offset: '100%'
+              }],
+              map: map
+            });
+
+            animateCircle();
+
+            function animateCircle() {
+                var count = 0,
+                    interval;
+                interval = window.setInterval(function() {
+                  count = (count + 1) % 200;
+
+                  var icons = line.get('icons');
+                  icons[0].offset = (count / 2) + '%';
+                  line.set('icons', icons);
+                  if(!loop && count === 199){
+                    clearInterval(interval);
+                  }
+              }, 20);
+            }
+          }
+        });
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
