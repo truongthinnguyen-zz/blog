@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,10 +6,19 @@
     <meta charset="utf-8">
     <title>Travel modes in directions</title>
     <style>
-      html, body, #map-canvas {
+      #container{
+        width: 100%;
+        height: 100%;
+      }
+      html, body{
         height: 100%;
         margin: 0px;
-        padding: 0px
+        padding: 0px;
+      }
+      #map-canvas {
+        width: 600px;
+        height: 600px;
+        float: left;
       }
       #panel {
         position: absolute;
@@ -20,8 +30,13 @@
         padding: 5px;
         border: 1px solid #999;
       }
+      .content{
+        width: 50%;
+        float: left;
+      }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&language=vi"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>
       var loop = true;
       var directionsDisplay;
@@ -49,7 +64,17 @@
         };
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
-            console.log(response);
+            var ul = $('.content ul');
+            var steps = response.routes[0].legs[0].steps;
+            var html = [];
+            for(var s = 0; s < steps.length; s++){
+              var currentStep = steps[s];
+              html.push('<li>'+ currentStep.instructions +
+                          '<p>'+currentStep.distance.text+' ('+currentStep.distance.value+'m)</p>' +
+                          '<p>'+currentStep.duration.text+' ('+currentStep.duration.value+'s)</p>' +
+                        '</li>');
+            }
+            ul.html(html);
             directionsDisplay.setDirections(response);
 
             var lineCoordinates = [],
@@ -101,6 +126,13 @@
     </script>
   </head>
   <body>
-    <div id="map-canvas"></div>
+    <div id="container">
+      <div id="map-canvas"></div>
+      <div class="content">
+        <ul>
+
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
