@@ -3224,6 +3224,9 @@ button.gamma-btn-sspause:before {
     padding-left: 110px;
     margin-bottom: 25px;
     text-align: center;
+    z-index: 2;
+    display: block;
+    position: relative;
 }
 
 .more a{
@@ -3494,7 +3497,8 @@ button.gamma-btn-sspause:before {
         margin-left: -2px;
     }
 
-    .timeline-item{
+    .timeline-item,
+    .more{
         padding-top: 0;
         padding-left: 0;
     }
