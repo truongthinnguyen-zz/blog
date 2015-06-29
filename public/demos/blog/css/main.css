@@ -698,14 +698,14 @@ select#option-menu:hover{
 }
 .timeline-item .timeline-item-content{
     padding: 20px;
-    padding-right: 120px;
+    /*padding-right: 120px;*/
 }
 .timeline-item .timeline-item-content .timeline-item-cover {
-    position: absolute;
+   /* position: absolute;
     top: 20px;
     right: 20px;
     bottom: 20px;
-    width: 80px;
+    width: 80px;*/
     overflow: hidden;
     -moz-border-radius: 0 4px 4px 0;
     -webkit-border-radius: 0 4px 4px 0;
