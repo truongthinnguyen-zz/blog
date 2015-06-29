@@ -3171,8 +3171,74 @@ button.gamma-btn-sspause:before {
     user-select: none;
 }
 
+/*
+// CUSTOM Layout
+*/
 
+#latest-articles{
+    background-color: #fff;
+    padding: 0;
+}
 
+#latest-articles li
+{
+    list-style: none;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #eee;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+
+#latest-articles li:hover a
+{
+    background-color: #f4f4f4;
+    color: #777 !important;
+}
+
+#latest-articles li a{
+    display: table;
+    color: #777 !important;
+    text-decoration: none !important;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#latest-articles li a img {
+    width: 40px !important;
+    height: 40px !important;
+    border: 2px solid #fff;
+    outline: 1px solid #e4e4e4;
+    margin-right: 14px;
+    vertical-align: middle;
+}
+
+#latest-articles li a span{
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+}
+
+.more{
+    padding-left: 110px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.more a{
+    font-family: 'Bitter', serif;
+    font-size: 1.5em;
+    text-align: center;
+    background-color: #ea4848;
+    box-shadow: 0 0 5px #ef7f65 inset, 0 1px 1px #eee;
+    padding: 12px;
+
+}
+
+.more a:hover{
+    color: #4c4d51;
+};
 /*
 // Media queries
 */
