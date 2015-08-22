@@ -1,14 +1,25 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
+    <meta name="google-translate-customization" content="AIzaSyC1mFAnJaAxth0EBUm2RiT71qNeIFiQyHI" />
     <title>Travel modes in directions</title>
     <style>
-      html, body, #map-canvas {
+      #container{
+        width: 100%;
+        height: 100%;
+      }
+      html, body{
         height: 100%;
         margin: 0px;
-        padding: 0px
+        padding: 0px;
+      }
+      #map-canvas {
+        width: 600px;
+        height: 600px;
+        float: left;
       }
       #panel {
         position: absolute;
@@ -20,8 +31,13 @@
         padding: 5px;
         border: 1px solid #999;
       }
+      .content{
+        width: 50%;
+        float: left;
+      }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&language=vi"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script>
       var loop = true;
       var directionsDisplay;
@@ -49,7 +65,17 @@
         };
         directionsService.route(request, function(response, status) {
           if (status == google.maps.DirectionsStatus.OK) {
-            console.log(response);
+            var ul = $('.content ul');
+            var steps = response.routes[0].legs[0].steps;
+            var html = [];
+            for(var s = 0; s < steps.length; s++){
+              var currentStep = steps[s];
+              html.push('<li>'+ currentStep.instructions +
+                          '<p>'+currentStep.distance.text+' ('+currentStep.distance.value+'m)</p>' +
+                          '<p>'+currentStep.duration.text+' ('+currentStep.duration.value+'s)</p>' +
+                        '</li>');
+            }
+            ul.html(html);
             directionsDisplay.setDirections(response);
 
             var lineCoordinates = [],
@@ -101,6 +127,154 @@
     </script>
   </head>
   <body>
-    <div id="map-canvas"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+          new google.translate.TranslateElement(
+              {
+                  pageLanguage: 'en',
+                  includedLanguages: 'de,en,es,fr,ja,nl,pt,zh-CN',
+                  layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                  autoDisplay: false
+              },
+              'artitleTranslate'
+          );
+
+          googObj.translator.init();
+      }
+      </script>
+      <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <div id="artitleTranslate"> </div><!-- Google Translate Div -->
+
+    <!-- Custom Language dropdown -->
+    <select id="customTranslate">
+        <option value="English">English</option>
+        <option value="French">Fran&#231;ais</option>
+        <option value="Dutch">Nederlands</option>
+        <option value="Chinese (Simplified)">&#31616;&#20307;&#20013;&#25991;</option>
+        <option value="German">Deutsch</option>
+        <option value="Japanese">&#26085;&#26412;&#35486;</option>
+        <option value="Portuguese">Portugu&#234;s</option>
+        <option value="Spanish">Espa&#241;ol</option>
+    </select>
+
+    <!-- Styles -->
+    <style type="text/css">
+    #artitleTranslate, #customTranslate, .goog-te-banner-frame {
+     display: none;
+    }
+    </style>
+    <!--<div id="google_translate_element"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,th,vi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
+    <script type="text/javascript">
+      var googObj = googObj || {};
+
+      (function($) {
+        googObj.translator = {
+            langCode: {
+                'en': 'English',
+                'fr': 'French',
+                'nl': 'Dutch',
+                'de': 'German',
+                'zh-CN': 'Chinese (Simplified)',
+                'ja': 'Japanese',
+                'pt': 'Portuguese',
+                'es': 'Spanish'
+            },
+
+            initDropdown: function() {
+                $('#customTranslate').change(function() {
+                    $(this).blur();
+                    var lang = $(this).val();
+                    var $frame = $('iframe.goog-te-menu-frame:first');
+                    if (!$frame.size()) {
+                        return false;
+                    }
+
+                    $( $frame.contents().find('.goog-te-menu2-item span.text') ).each(function( index ) {
+                        if ($(this).text() == lang) {
+                            if (lang == 'English') {
+                                googObj.translator.showOriginalText();
+                                return false;
+                            }
+
+                            $(this).click();
+
+                            return false;
+                        }
+                    });
+                    return false;
+                });
+            },
+
+            showOriginalText: function() {
+                var googBar = $('iframe.goog-te-banner-frame:first');
+                $( googBar.contents().find('.goog-te-button button') ).each(function( index ) {
+                    if ( $(this).text() == 'Show original' ) {
+                        $(this).trigger('click');
+
+                        if ($('#customTranslate').val() != 'English') {
+                            $('#customTranslate').val('English');
+                        }
+                        return false;
+                    }
+                });
+            },
+
+            setLangDropdown: function() {
+                var cookieVal = this.getCookieValue();
+                if (cookieVal) {
+                    $('#customTranslate').val( this.langCode[cookieVal] );
+                }
+            },
+
+            getCookieValue: function() {
+                var transCookie = getCookie('googtrans');
+                if ( transCookie ) {
+                    transCookie = transCookie.split('/');
+                    transCookie = transCookie[2];
+                    return transCookie;
+                }
+
+                return false;
+            },
+
+            init: function() {
+                if (document.getElementById('customTranslate')) {
+                    $('#customTranslate').show();
+                    this.initDropdown();
+                    this.setLangDropdown();
+                }
+            }
+        }
+      })(jQuery);
+
+      function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for (var i=0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+              if ( c.indexOf(nameEQ) == 0 ) {
+                  return c.substring(nameEQ.length,c.length);
+              }
+          }
+          return null;
+      }
+    </script>
+
+    <div id="container">
+      <div id="map-canvas"></div>
+      <div class="content">
+        <ul>
+
+        </ul>
+      </div>
+    </div>
   </body>
 </html>
